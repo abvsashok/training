@@ -9,7 +9,7 @@ function AppRouts() {
   return <BrowserRouter>
     <Link to="/home">Home</Link> <br />
     <Link to="/about">About</Link> <br />
-    <Link to="/careers">Careers</Link>
+    <Link to="/contact">Contact</Link>
     <Switch>
       <Route exact path="/home" component={HomePage} />
       <Route exact path="/about" component={AboutPage} />
