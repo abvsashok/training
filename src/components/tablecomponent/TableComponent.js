@@ -19,6 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import axios from "axios"
+import { getTableContext } from '../../App';
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -198,6 +199,7 @@ export default function TableComponent() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [tabledata, settabledata] = React.useState([]);
+  const tabledatacontxt=React.useContext(getTableContext)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -253,12 +255,16 @@ export default function TableComponent() {
 
   //// getting data//////
   React.useEffect(()=>{
-  axios.get("https://jsonplaceholder.typicode.com/todos").then((res)=>{
-    console.log(res.data)
-    settabledata(res.data)
-  }).catch((err)=>{
-  console.log(err)
-  })
+    
+  // axios.get("https://jsonplaceholder.typicode.com/todos").then((res)=>{
+  // countcontextt.countDispatch("increment")
+  //   console.log(res.data)
+  //   settabledata(res.data)
+  // }).catch((err)=>{
+  // console.log(err)
+  // })
+  tabledatacontxt.disptch("GET_TABLE_DATA")
+console.log(tabledatacontxt.us)
   },[])
   return (
     <div className={classes.root}>
@@ -281,7 +287,7 @@ export default function TableComponent() {
               rowCount={rows.length}
             />
             <TableBody>
-              {tabledata.map(item =>
+              {tabledatacontxt.userTableData.map(item =>
               (
                 <TableRow>
                   <TableCell align="center" className="horse-text">{item.userId}</TableCell>
