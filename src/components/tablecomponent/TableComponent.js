@@ -274,17 +274,24 @@ export default function TableComponent() {
 
   //// getting data//////
   React.useEffect(() => {
-    // axios
-      // .get("https://jsonplaceholder.typicode.com/todos")
-      // .then((res) => {
-      //   console.log(res.data);
-      //   settabledata(res.data);
-        dispatch({ type: tableConst.ADD_DATA_TO_TABLE, payload: res.data });
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
-    console.log("state", state);
+  if (state.tableData.length>0) {
+    console.log("if",state)
+  } else {
+    axios
+    .get("https://jsonplaceholder.typicode.com/todos")
+    .then((res) => {
+      // console.log(res.data);
+      // settabledata(res.data);
+      dispatch({ type: tableConst.ADD_DATA_TO_TABLE, payload: res.data });
+    console.log("else",state)
+
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // console.log("state", state);
+  }
+  
   }, []);
   return (
     <div className={classes.root}>
