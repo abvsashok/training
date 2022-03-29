@@ -1,33 +1,35 @@
-import { createContext, useContext, useReducer } from "react";
-import { tableConst } from "./tableConst";
-// import { timelineOptions } from '../components/timeline/util';
+import { createContext, useContext, useReducer } from 'react';
+import { tableConst } from './tableConst';
 
-const tableContext = createContext();
+const TableContext = createContext();
+
+export const useTableContext = () => useContext(TableContext);
 
 const tableReducer = (state, action) => {
   switch (action.type) {
     case tableConst.ADD_DATA_TO_TABLE:
-      console.log(action.payload);
+        console.log('payload',action.payload)
       return {
         ...state,
-        tableData: action.payload
+        tableData: action.payload,
       };
-    default: {
+    default:
       return state;
-    }
   }
 };
+
 const initialState = {
-  tableData: []
+    tableData:[]
 };
-export const tableContextProvider = ({ children }) => {
+
+export const TableContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(tableReducer, initialState);
 
   return (
-    <tableContext.Provider value={{ state, dispatch }}>
+    <TableContext.Provider value={{ state, dispatch }}>
       {children}
-    </tableContext.Provider>
+    </TableContext.Provider>
   );
 };
 
-export const useTableContext = () => useContext(tableContext);
+

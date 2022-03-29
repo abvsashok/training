@@ -7,7 +7,7 @@ import Header from "./components/Shared/Header";
 import Cardcomponent from "./components/cardcomponent/Cardcomponent";
 import Buttoncomponent from "./components/btncomponent/Buttoncomponent";
 
-import { tableContextProvider } from "./context/tableContext";
+import { TableContextProvider } from "./context/tableContext";
 // import getTableDataReducer from './contextApi/GetTableData/getTableDataReducer';
 // import { initialState } from './contextApi/GetTableData/getTableInitialState';
 // export const getTableContext=createContext()
@@ -16,7 +16,7 @@ function App() {
   // const [tabledatastate,dispatch]=useReducer(getTableDataReducer,initialState)
   return (
     // <getTableContext.Provider value={{tabledatastate,dispatch}}>
-    <tableContextProvider>
+    <TableContextProvider>
       <div className="">
         <AppRouts />
 
@@ -26,7 +26,7 @@ function App() {
           cardtitle="card title"
         ></Cardcomponent>
       </div>
-    </tableContextProvider>
+    </TableContextProvider>
     // </getTableContext.Provider>
   );
 }
