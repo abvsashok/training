@@ -19,7 +19,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import axios from "axios"
-import { getTableContext } from '../../App';
+import { useTableContext } from '../../context/tableContext';
+import { tableConst } from '../../context/tableConst';
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -199,8 +200,8 @@ export default function TableComponent() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [tabledata, settabledata] = React.useState([]);
-  const tabledatacontxt=React.useContext(getTableContext)
-
+  const {state,dispatch}=useTableContext()
+  
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -263,8 +264,8 @@ export default function TableComponent() {
   // }).catch((err)=>{
   // console.log(err)
   // })
-  tabledatacontxt.disptch("GET_TABLE_DATA")
-console.log(tabledatacontxt.us)
+  dispatch({ type: tableConst.ADD_DATA_TO_TABLE,payload:[{name:"uday"}] })
+console.log("state",state)
   },[])
   return (
     <div className={classes.root}>
